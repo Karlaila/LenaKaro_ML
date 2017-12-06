@@ -41,7 +41,7 @@ def divide_set(features, labels):
             Y_test.append(labels[i])
         else:
             X_train.append(features[i])
-            Y_test.append(labels[i])
+            Y_train.append(labels[i])
     return X_test, Y_test, X_train, Y_train
 
 
@@ -53,14 +53,14 @@ X_test, Y_test, X_train, Y_train = divide_set(features, labels)
 #print "labels \n", labels[1:10]
 
 """showing the distribution of classes"""
-counter = collections.Counter(labels)
+"""counter = collections.Counter(labels)
 print(counter.values())
 print(counter.keys())
 print(counter.most_common(3))
 
 width = 1 / 1.5
 plt.bar(counter.keys(), counter.values(), width, color="blue")
-plt.show()
+plt.show()"""
 
 """SVC classification"""
 clf = svm.SVC(decision_function_shape='ovo')
@@ -71,7 +71,14 @@ print "finished fitting, starts predicting"
 ok = 0
 notok = 0
 for i in range(0, len(Y_test)):
-
+    result = clf.predict(X_test[i])
+    if result == Y_test[i]:
+        ok += 1
+    else:
+        notok += 1
+    if i < 20:
+        print result, Y_test[i]
+print ok, notok
 
 #dec = clf.decision_function()
 
