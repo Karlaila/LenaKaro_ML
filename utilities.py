@@ -14,7 +14,7 @@ def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_li
         reader = csv.reader(csvfile, delimiter=',')
         counter = 0
         for row in reader:
-            if counter > data_limit:
+            if counter > data_limit or data_limit == -1:
                 X.append([float(i) for i in row])
             counter+=1
 
@@ -23,7 +23,7 @@ def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_li
     with open(path_labels, 'r') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
-            if counter > data_limit:
+            if counter > data_limit or data_limit == -1:
                 Y.append(float(row[0]))
             counter+=1
 
