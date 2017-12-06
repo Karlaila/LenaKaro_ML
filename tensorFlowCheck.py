@@ -1,2 +1,5 @@
-import tensorflow as ts
+import tensorflow as tf
+import scipy
+import sklearn
 
+sess = tf.InteractiveSession()
