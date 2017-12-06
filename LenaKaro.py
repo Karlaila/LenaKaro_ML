@@ -46,6 +46,24 @@ def divide_set(features, labels):
             Y_train.append(labels[i])
     return X_test, Y_test, X_train, Y_train
 
+def do_svc(X_test, Y_test, X_train, Y_train):
+    clf = svm.SVC(decision_function_shape='ovo', class_weight='balanced')
+    print "starts fitting"
+    print clf.fit(X_train, Y_train)
+
+    print "finished fitting, starts predicting"
+    ok = 0
+    notok = 0
+    for i in range(0, len(Y_test)):
+        result = clf.predict([X_test[i]])
+        if result == Y_test[i]:
+            ok += 1
+        else:
+            notok += 1
+        #if i < 900:
+        #    print result, Y_test[i]
+    return "ok: ", ok, "; not ok:", notok, "; percentage: ", (ok*100)/(notok+ok)
+
 
 features, labels = parse(data_limit=-1)
 
@@ -66,27 +84,4 @@ plt.bar(counter.keys(), counter.values(), width, color="blue")
 plt.show()"""""
 
 """SVC classification"""
-clf = svm.SVC(decision_function_shape='ovo', class_weight='balanced')
-print "starts fitting"
-print clf.fit(X_train, Y_train)
-#dec = clf.decision_function([X_train[100]])
-#print dec
-#print "dec.shape", dec.shape[1] # 4 classes
-
-
-print "finished fitting, starts predicting"
-ok = 0
-notok = 0
-for i in range(0, len(Y_test)):
-    result = clf.predict([X_test[i]])
-    if result == Y_test[i]:
-        ok += 1
-    else:
-        notok += 1
-    if i < 900:
-        print result, Y_test[i]
-print ok, notok
-
-#dec = clf.decision_function()
-
-# [(1, 4), (2, 4), (3, 2)]
+print do_svc(X_test, Y_test, X_train, Y_train)
