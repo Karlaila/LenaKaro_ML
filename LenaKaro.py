@@ -59,6 +59,7 @@ def check (Y_test, Y_pred):
             #    print result, Y_test[i]
     return "ok: ", ok, "; not ok:", notok, "; percentage: ", (ok * 100) / (notok + ok)
 
+# for followitg features the best score
 def do_svc(X_test, Y_test, X_train, Y_train):
     clf = svm.SVC(decision_function_shape='ovo', class_weight='balanced', kernel = "poly")
     print "starts fitting"
@@ -69,10 +70,17 @@ def do_svc(X_test, Y_test, X_train, Y_train):
         Y_pred.append(clf.predict([X_test[i]]))
     return Y_pred
 
+# very random, no matter of loss and penalty functions, between 35-56 percent
 def do_sgd(X_test, Y_test, X_train, Y_train):
     # creating a classifier of loss function "hinge" and penalty function "l2"
     clf = SGDClassifier(loss="hinge", penalty="l2")
+    print "starts fitting"
     print clf.fit(X_train, Y_train)
+    print "finished fitting"
+    Y_pred = []
+    for i in range(0, len(Y_test)):
+        Y_pred.append(clf.predict([X_test[i]]))
+    return Y_pred
 
 
 features, labels = parse(data_limit=-1)
@@ -93,6 +101,6 @@ width = 1 / 1.5
 plt.bar(counter.keys(), counter.values(), width, color="blue")
 plt.show()"""""
 
-"""SVC classification"""
-Y_pred = do_svc(X_test, Y_test, X_train, Y_train)
+"""classification"""
+Y_pred = do_sgd(X_test, Y_test, X_train, Y_train)
 print check(Y_test, Y_pred)
