@@ -1,6 +1,8 @@
 from sklearn import svm
 from sklearn.linear_model import SGDClassifier
 from sklearn import tree
+import csv
+import collections
 
 
 def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_limit = -1):
@@ -44,6 +46,13 @@ def divide_set(features, labels):
             Y_train.append(labels[i])
     return X_test, Y_test, X_train, Y_train
 
+def even_classes(X, Y):
+    counter=collections.Counter(Y)
+    distribution = counter.values()
+    print(distribution)
+    least_common = counter.least_common(1)
+    print least_common
+    
 
 def check (Y_test, Y_pred):
     ok = 0
