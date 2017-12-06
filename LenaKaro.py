@@ -2,6 +2,7 @@ import csv
 import collections
 import matplotlib.pyplot as plt
 from sklearn import svm
+from sklearn.linear_model import SGDClassifier
 from random import shuffle
 import data_visualizer as dv
 
@@ -47,27 +48,33 @@ def divide_set(features, labels):
             Y_train.append(labels[i])
     return X_test, Y_test, X_train, Y_train
 
-def do_svc(X_test, Y_test, X_train, Y_train):
-    clf = svm.SVC(decision_function_shape='ovo', class_weight='balanced')
-    print "starts fitting"
-    print clf.fit(X_train, Y_train)
-
-    print "finished fitting, starts predicting"
+def check (Y_test, Y_pred):
     ok = 0
     notok = 0
     Y_pred = []
     for i in range(0, len(Y_test)):
-        result = clf.predict([X_test[i]])
-        Y_pred.append(result)
-        if result == Y_test[i]:
+        if Y_pred[i] == Y_test[i]:
             ok += 1
         else:
             notok += 1
-        #if i < 900:
-        #    print result, Y_test[i]
+            # if i < 900:
+            #    print result, Y_test[i]
+    return "ok: ", ok, "; not ok:", notok, "; percentage: ", (ok * 100) / (notok + ok)
 
-    dv.confusionMatrix(Y_test, Y_pred)
-    return "ok: ", ok, "; not ok:", notok, "; percentage: ", (ok*100)/(notok+ok)
+def do_svc(X_test, Y_test, X_train, Y_train):
+    clf = svm.SVC(decision_function_shape='ovo', class_weight='balanced', kernel = "poly")
+    print "starts fitting"
+    print clf.fit(X_train, Y_train)
+    print "finished fitting"
+    Y_pred = []
+    for i in range(0, len(Y_test)):
+        Y_pred.append(clf.predict([X_test[i]]))
+    return Y_pred
+
+def do_sgd(X_test, Y_test, X_train, Y_train):
+    # creating a classifier of loss function "hinge" and penalty function "l2"
+    clf = SGDClassifier(loss="hinge", penalty="l2")
+    print clf.fit(X_train, Y_train)
 
 
 features, labels = parse(data_limit=-1)
@@ -89,4 +96,5 @@ plt.bar(counter.keys(), counter.values(), width, color="blue")
 plt.show()"""""
 
 """SVC classification"""
-print do_svc(X_test, Y_test, X_train, Y_train)
+Y_pred = do_svc(X_test, Y_test, X_train, Y_train)
+print check(Y_test, Y_pred)
