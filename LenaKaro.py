@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn import svm
 from random import shuffle
 
+# X id, 2-49 MFCCs, 50-97 Chroma, 98-265 Rhytm
 
 def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_limit = -1):
     X = []
@@ -11,23 +12,24 @@ def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_li
         reader = csv.reader(csvfile, delimiter=',')
         counter = 0
         for row in reader:
-            X.append([float(i) for i in row])
+            if counter > 0:
+                X.append([float(i) for i in row])
             if data_limit > 0:
                 if counter > data_limit:
                     break
-                else:
-                    counter+=1
+            counter+=1
+
     counter = 0
     Y = []
     with open(path_labels, 'r') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
-            Y.append(float(row[0]))
+            if counter > 0:
+                Y.append(float(row[0]))
             if data_limit > 0:
                 if counter > data_limit:
                     break
-                else:
-                    counter+=1
+            counter+=1
 
     return X, Y
 
@@ -37,10 +39,10 @@ def divide_set(features, labels):
     # dividing into test and train data
     for i in range(0, len(labels)):
         if i % 4 == 0:
-            X_test.append(features[i])
+            X_test.append(features[i][50:265])
             Y_test.append(labels[i])
         else:
-            X_train.append(features[i])
+            X_train.append(features[i][50:265])
             Y_train.append(labels[i])
     return X_test, Y_test, X_train, Y_train
 
@@ -48,6 +50,7 @@ def divide_set(features, labels):
 features, labels = parse(data_limit=-1)
 
 X_test, Y_test, X_train, Y_train = divide_set(features, labels)
+print len(X_test), len(Y_test), len(Y_train)
 
 #print "features \n", features[1:10]
 #print "labels \n", labels[1:10]
@@ -60,23 +63,27 @@ print(counter.most_common(3))
 
 width = 1 / 1.5
 plt.bar(counter.keys(), counter.values(), width, color="blue")
-plt.show()"""
+plt.show()"""""
 
 """SVC classification"""
-clf = svm.SVC(decision_function_shape='ovo')
+clf = svm.SVC(decision_function_shape='ovo', class_weight='balanced')
 print "starts fitting"
 print clf.fit(X_train, Y_train)
+#dec = clf.decision_function([X_train[100]])
+#print dec
+#print "dec.shape", dec.shape[1] # 4 classes
+
 
 print "finished fitting, starts predicting"
 ok = 0
 notok = 0
 for i in range(0, len(Y_test)):
-    result = clf.predict(X_test[i])
+    result = clf.predict([X_test[i]])
     if result == Y_test[i]:
         ok += 1
     else:
         notok += 1
-    if i < 20:
+    if i < 900:
         print result, Y_test[i]
 print ok, notok
 
