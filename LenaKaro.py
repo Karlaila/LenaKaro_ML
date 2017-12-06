@@ -3,6 +3,7 @@ import collections
 import matplotlib.pyplot as plt
 from sklearn import svm
 from random import shuffle
+import data_visualizer as dv
 
 # X id, 2-49 MFCCs, 50-97 Chroma, 98-265 Rhytm
 
@@ -54,14 +55,18 @@ def do_svc(X_test, Y_test, X_train, Y_train):
     print "finished fitting, starts predicting"
     ok = 0
     notok = 0
+    Y_pred = []
     for i in range(0, len(Y_test)):
         result = clf.predict([X_test[i]])
+        Y_pred.append(result)
         if result == Y_test[i]:
             ok += 1
         else:
             notok += 1
         #if i < 900:
         #    print result, Y_test[i]
+
+    dv.confusionMatrix(Y_test, Y_pred)
     return "ok: ", ok, "; not ok:", notok, "; percentage: ", (ok*100)/(notok+ok)
 
 
