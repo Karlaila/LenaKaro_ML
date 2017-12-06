@@ -1,6 +1,11 @@
+import csv
 from sklearn import svm
 from sklearn.linear_model import SGDClassifier
 from sklearn import tree
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.gaussian_process.kernels import RBF
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import MultinomialNB
 
 
 def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_limit = -1):
@@ -9,11 +14,8 @@ def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_li
         reader = csv.reader(csvfile, delimiter=',')
         counter = 0
         for row in reader:
-            if counter > 0:
+            if counter > data_limit:
                 X.append([float(i) for i in row])
-            if data_limit > 0:
-                if counter > data_limit:
-                    break
             counter+=1
 
     counter = 0
@@ -21,11 +23,8 @@ def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_li
     with open(path_labels, 'r') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
-            if counter > 0:
+            if counter > data_limit:
                 Y.append(float(row[0]))
-            if data_limit > 0:
-                if counter > data_limit:
-                    break
             counter+=1
 
     return X, Y
@@ -75,11 +74,11 @@ def do_sgd(X_test, Y_test, X_train, Y_train):
     clf = SGDClassifier(loss="hinge", penalty="l2")
     print "starts fitting"
     print clf.fit(X_train, Y_train)
-    print "finished fitting"
-    Y_pred = []
-    for i in range(0, len(Y_test)):
-        Y_pred.append(clf.predict([X_test[i]]))
+    print "finished fitting, starts predictions"
+    Y_pred = clf.predict(X_test)
+    print "finished predictions"
     return Y_pred
+
 
 
 # very low score (around 30)
@@ -88,21 +87,41 @@ def do_dec_tree(X_test, Y_test, X_train, Y_train):
     clf = tree.DecisionTreeClassifier()
     print "starts fitting"
     print clf.fit(X_train, Y_train)
-    print "finished fitting"
-    Y_pred = []
-    for i in range(0, len(Y_test)):
-        Y_pred.append(clf.predict([X_test[i]]))
+    print "finished fitting, starts predictions"
+    Y_pred = clf.predict(X_test)
+    print "finished predictions"
     return Y_pred
 
 
-# ?
+
+# Gaussian process classification - very long
 def do_gpc(X_test, Y_test, X_train, Y_train):
     # creating a classifier of loss function "hinge" and penalty function "l2"
-    clf = tree.DecisionTreeClassifier()
+    clf = GaussianProcessClassifier(kernel=1.0 * RBF(length_scale=1.0))
     print "starts fitting"
     print clf.fit(X_train, Y_train)
-    print "finished fitting"
-    Y_pred = []
-    for i in range(0, len(Y_test)):
-        Y_pred.append(clf.predict([X_test[i]]))
+    print "finished fitting, starts predictions"
+    Y_pred = clf.predict(X_test)
+    print "finished predictions"
+    return Y_pred
+
+
+# Gaussian Naive Bayes
+def do_gnb(X_test, Y_test, X_train, Y_train):
+    clf = GaussianNB()
+    print "starts fitting"
+    print clf.fit(X_train, Y_train)
+    print "finished fitting, starts predictions"
+    Y_pred = clf.predict(X_test)
+    print "finished predictions"
+    return Y_pred
+
+# Multinomial Naive Bayes
+def do_mnb(X_test, Y_test, X_train, Y_train):
+    clf = MultinomialNB()
+    print "starts fitting"
+    print clf.fit(X_train, Y_train)
+    print "finished fitting, starts predictions"
+    Y_pred = clf.predict(X_test)
+    print "finished predictions"
     return Y_pred
