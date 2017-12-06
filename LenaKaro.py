@@ -1,4 +1,3 @@
-import csv
 import collections
 import matplotlib.pyplot as plt
 import data_visualizer as dv
@@ -8,7 +7,7 @@ import utilities as ut
 
 
 
-features, labels = ut.parse(data_limit=-1)
+features, labels = ut.parse(data_limit=1000)
 
 X_test, Y_test, X_train, Y_train = ut.divide_set(features, labels)
 print len(X_test), len(Y_test), len(Y_train)
@@ -28,6 +27,6 @@ plt.show()"""""
 
 
 """classification"""
-Y_pred = ut.do_dec_tree(X_test, Y_test, X_train, Y_train)
+Y_pred = ut.do_mnb(X_test, Y_test, X_train, Y_train)
 print ut.check(Y_test, Y_pred)
 dv.confusionMatrix(Y_test, Y_pred)
