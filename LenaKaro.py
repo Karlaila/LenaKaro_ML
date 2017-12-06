@@ -47,7 +47,7 @@ def divide_set(features, labels):
     return X_test, Y_test, X_train, Y_train
 
 def do_svc(X_test, Y_test, X_train, Y_train):
-    clf = svm.SVC(decision_function_shape='ovo', class_weight='balanced')
+    clf = svm.SVC(decision_function_shape='ovo', class_weight='balanced', kernel = "poly")
     print "starts fitting"
     print clf.fit(X_train, Y_train)
 
