@@ -11,6 +11,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neural_network import MLPClassifier
 from sklearn import neighbors
+import numpy as np
 
 
 """ parsing """
@@ -71,6 +72,15 @@ def even_classes(X, Y, number = -1):
     return X_new, Y_new
 #TODO continue
 
+def output_labels(Y, filename='labels'):
+    print 'output file with labels'
+    with open(filename+'.csv', 'w') as csvfile:
+        fieldnames = ['Sample_id', 'Sample_label']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for i in xrange(1,len(Y)):
+            writer.writerow({'Sample_id': str(int(i)), 'Sample_label': str(int(Y[i]))})
+
 
 """checking"""
 
@@ -95,8 +105,29 @@ def output_labels(Y, filename='labels'):
         for i in xrange(1,len(Y)+1):
             writer.writerow({'Sample_id': str(int(i)), 'Sample_label': str(int(Y[i-1]))})
 
+def checkLogLoss(Y_test, Y_predLL):
+    N = len(Y_test)
+    res = 0
+    for i in range(N):
+        for cl in range(1,11):
+            # sum only the prob of the right class
+            if Y_test[i] == cl:
+                res += np.log(Y_predLL[i][cl-1])
+    res /= N
+    return -res
 
-# for followitg features the best score
+def ckeckLogLossDummy(Y_test):
+    N = len(Y_test)
+    res = 0
+    for i in range(N):
+        for cl in range(1, 11):
+            # sum only the prob of the right class
+            if Y_test[i] == 1:
+                res += np.log(1)
+
+    res /= N
+    return -res
+
 
 
 """accuracy"""
@@ -148,7 +179,7 @@ def do_mlp(X_test, Y_test, X_train, Y_train):
     print clf.classes_
     print clf.out_activation_
     print "finished fitting, starts predictions"
-    Y_pred = clf.predict(X_test)
+    Y_pred = clf.predict_proba(X_test)
     print "finished predictions"
     return Y_pred
 
@@ -162,7 +193,7 @@ def do_nn(X_test, Y_test, X_train, Y_train):
     print "finished fitting"
     Y_pred = []
     for i in range(0, len(Y_test)):
-        Y_pred.append(clf.predict([X_test[i]]))
+        Y_pred.append(clf.predict_proba([X_test[i]]))
     return Y_pred
 
 
