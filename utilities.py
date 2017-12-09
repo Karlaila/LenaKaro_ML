@@ -25,17 +25,22 @@ def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_li
                 X.append([float(i) for i in row])
             counter+=1
 
-    counter = 0
-    Y = []
-    with open(path_labels, 'r') as csvfile:
-        reader = csv.reader(csvfile)
-        for row in reader:
-            if counter > data_limit or data_limit == -1:
-                Y.append(float(row[0]))
-            counter+=1
+    counter = 0   
+    if path_labels != '':
+        Y = []
+        with open(path_labels, 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                if counter > data_limit or data_limit == -1:
+                    Y.append(float(row[0]))
+                counter+=1
+        return X, Y
+    return X
 
-    return X, Y
-
+def get2ClassLabels(Y):
+    for y in Y:
+        if y != 1:
+            y = 0
 
 def divide_set(features, labels, fraction = 4):
     X_test, Y_test, X_train, Y_train = [], [], [], []
@@ -67,6 +72,15 @@ def even_classes(X, Y, number = -1):
     return X_new, Y_new
 #TODO continue
 
+def output_labels(Y, filename='labels'):
+    print 'output file with labels'
+    with open(filename+'.csv', 'w') as csvfile:
+        fieldnames = ['Sample_id', 'Sample_label']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for i in xrange(1,len(Y)):
+            writer.writerow({'Sample_id': str(int(i)), 'Sample_label': str(int(Y[i]))})
+
 
 """checking"""
 
@@ -81,6 +95,7 @@ def check (Y_test, Y_pred):
             # if i < 900:
             #    print result, Y_test[i]
     return "ok: ", ok, "; not ok:", notok, "; percentage: ", (ok * 100) / (notok + ok)
+
 
 def checkLogLoss(Y_test, Y_predLL):
     N = len(Y_test)
@@ -105,6 +120,8 @@ def ckeckLogLossDummy(Y_test):
     res /= N
     return -res
 
+
+
 """accuracy"""
 
 # linear model - Ridge Classifier - 62 ;o | with balanced class 54 | NOT LOGLOSS
@@ -119,7 +136,7 @@ def do_rc(X_test, Y_test, X_train, Y_train):
     return Y_pred
 
 # linear model - Ridge Classifier with Cross Valifation - 62 ;o | with balanced class 51
-def do_rcv(X_test, Y_test, X_train, Y_train):
+def do_rcv(X_test, X_train, Y_train):
     # creating a classifier of loss function "hinge" and penalty function "l2"
     clf = RidgeClassifierCV()
     print "starts fitting"
@@ -218,7 +235,6 @@ def do_mnb(X_test, Y_test, X_train, Y_train):
     Y_pred = clf.predict(X_test)
     print "finished predictions"
     return Y_pred
-
 
 # very random, no matter of loss and penalty functions, between 35-56 percent
 def do_sgd(X_test, Y_test, X_train, Y_train):

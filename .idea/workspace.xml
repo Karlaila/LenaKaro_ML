@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ffd049c-9b96-4d90-b6d4-06614c413182" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/labels_rc.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LenaKaro.py" afterPath="$PROJECT_DIR$/LenaKaro.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utilities.py" afterPath="$PROJECT_DIR$/utilities.py" />
@@ -39,8 +40,8 @@
       <file leaf-file-name="LenaKaro.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LenaKaro.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="35" column="33" lean-forward="true" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
+            <state relative-caret-position="315">
+              <caret line="21" column="6" lean-forward="true" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -51,18 +52,15 @@
       <file leaf-file-name="utilities.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+            <state relative-caret-position="1005">
+              <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <element signature="e#638#1191#0" expanded="false" />
-                <element signature="e#1671#2088#0" expanded="false" />
-                <element signature="e#2154#2456#0" expanded="false" />
-                <element signature="e#3152#3450#0" expanded="false" />
-                <element signature="e#3591#3891#0" expanded="false" />
-                <element signature="e#3997#4293#0" expanded="false" />
-                <element signature="e#4448#4824#0" expanded="false" />
-                <element signature="e#4926#5212#0" expanded="false" />
+                <element signature="e#638#1264#0" expanded="false" />
+                <element signature="e#1294#1342#0" expanded="false" />
+                <element signature="e#1396#1778#0" expanded="false" />
+                <element signature="e#1821#2238#0" expanded="false" />
+                <element signature="e#2300#2646#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -72,7 +70,7 @@
         <entry file="file://$PROJECT_DIR$/nearestNeighbor.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
-              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="16" />
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="16" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -109,8 +107,8 @@
       <list>
         <option value="$PROJECT_DIR$/tensorFlowCheck.py" />
         <option value="$PROJECT_DIR$/parser.ipynb" />
-        <option value="$PROJECT_DIR$/LenaKaro.py" />
         <option value="$PROJECT_DIR$/utilities.py" />
+        <option value="$PROJECT_DIR$/LenaKaro.py" />
       </list>
     </option>
   </component>
@@ -235,7 +233,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -283,14 +281,11 @@
           <caret line="139" column="32" lean-forward="false" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#638#1191#0" expanded="false" />
-            <element signature="e#1671#2088#0" expanded="false" />
-            <element signature="e#2154#2456#0" expanded="false" />
-            <element signature="e#3152#3450#0" expanded="false" />
-            <element signature="e#3591#3891#0" expanded="false" />
-            <element signature="e#3997#4293#0" expanded="false" />
-            <element signature="e#4448#4824#0" expanded="false" />
-            <element signature="e#4926#5212#0" expanded="false" />
+            <element signature="e#638#1264#0" expanded="false" />
+            <element signature="e#1294#1342#0" expanded="false" />
+            <element signature="e#1396#1778#0" expanded="false" />
+            <element signature="e#1821#2238#0" expanded="false" />
+            <element signature="e#2300#2646#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -338,14 +333,11 @@
           <caret line="139" column="32" lean-forward="false" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#638#1191#0" expanded="false" />
-            <element signature="e#1671#2088#0" expanded="false" />
-            <element signature="e#2154#2456#0" expanded="false" />
-            <element signature="e#3152#3450#0" expanded="false" />
-            <element signature="e#3591#3891#0" expanded="false" />
-            <element signature="e#3997#4293#0" expanded="false" />
-            <element signature="e#4448#4824#0" expanded="false" />
-            <element signature="e#4926#5212#0" expanded="false" />
+            <element signature="e#638#1264#0" expanded="false" />
+            <element signature="e#1294#1342#0" expanded="false" />
+            <element signature="e#1396#1778#0" expanded="false" />
+            <element signature="e#1821#2238#0" expanded="false" />
+            <element signature="e#2300#2646#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -422,7 +414,7 @@
     <entry file="file://$PROJECT_DIR$/nearestNeighbor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="16" />
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="16" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
@@ -437,16 +429,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LenaKaro.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="33" lean-forward="true" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data_visualizer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -457,20 +439,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/LenaKaro.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="6" lean-forward="true" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+        <state relative-caret-position="1005">
+          <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#638#1191#0" expanded="false" />
-            <element signature="e#1671#2088#0" expanded="false" />
-            <element signature="e#2154#2456#0" expanded="false" />
-            <element signature="e#3152#3450#0" expanded="false" />
-            <element signature="e#3591#3891#0" expanded="false" />
-            <element signature="e#3997#4293#0" expanded="false" />
-            <element signature="e#4448#4824#0" expanded="false" />
-            <element signature="e#4926#5212#0" expanded="false" />
+            <element signature="e#638#1264#0" expanded="false" />
+            <element signature="e#1294#1342#0" expanded="false" />
+            <element signature="e#1396#1778#0" expanded="false" />
+            <element signature="e#1821#2238#0" expanded="false" />
+            <element signature="e#2300#2646#0" expanded="false" />
           </folding>
         </state>
       </provider>
