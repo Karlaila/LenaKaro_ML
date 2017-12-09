@@ -58,9 +58,7 @@ def even_classes(X, Y, number = -1):
         if sums_train[int(Y[i]-1)] < number:
             X_new.append(X[i])
             Y_new.append(Y[i])
-    return X_new, Y_new
-#TODO continue
-    
+    return X_new, Y_new    
 
 def check (Y_test, Y_pred):
     ok = 0
