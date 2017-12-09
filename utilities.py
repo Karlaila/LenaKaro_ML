@@ -70,7 +70,6 @@ def even_classes(X, Y, number = -1):
             X_new.append(X[i])
             Y_new.append(Y[i])
     return X_new, Y_new
-#TODO continue
 
 def output_labels(Y, filename='labels'):
     print 'output file with labels'
@@ -79,8 +78,20 @@ def output_labels(Y, filename='labels'):
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for i in xrange(1,len(Y)):
-            writer.writerow({'Sample_id': str(int(i)), 'Sample_label': str(int(Y[i]))})
+            writer.writerow({'Sample_id': str(int(i)), 'Sample_label': str(int(Y[i-1]))})
 
+def output_proba(probas, filename='probabilities'):
+    print 'output file with probabilities'
+    with open(filename+'.csv', 'w') as csvfile:
+        fieldnames = ['Sample_id']
+        for x in xrange(1,10):
+            fieldnames.append('Class_'+str(x))
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for i in xrange(1,len(probas)):
+            writer.writerow({'Sample_id': str(int(i)), 'Class_1': str(int(probas[i][0])), 'Class_2': str(int(probas[i][1])), 
+                'Class_3': str(int(probas[i][2])),'Class_4': str(int(probas[i][3])),'Class_5': str(int(probas[i][4])),'Class_6': str(int(probas[i][5])),
+                'Class_7': str(int(probas[i][6])),'Class_8': str(int(probas[i][7])), 'Class_9': str(int(probas[i][8])),'Class_10': str(int(probas[i][9]))})
 
 """checking"""
 
