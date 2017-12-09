@@ -92,8 +92,8 @@ def output_labels(Y, filename='labels'):
         fieldnames = ['Sample_id', 'Sample_label']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-        for i in xrange(1,len(Y)):
-            writer.writerow({'Sample_id': str(int(i)), 'Sample_label': str(int(Y[i]))})
+        for i in xrange(1,len(Y)+1):
+            writer.writerow({'Sample_id': str(int(i)), 'Sample_label': str(int(Y[i-1]))})
 
 
 # for followitg features the best score
@@ -102,7 +102,7 @@ def output_labels(Y, filename='labels'):
 """accuracy"""
 
 # linear model - Ridge Classifier - 62 ;o | with balanced class 54 | NOT LOGLOSS
-def do_rc(X_test, Y_test, X_train, Y_train):
+def do_rc(X_test, X_train, Y_train):
     # creating a classifier of loss function "hinge" and penalty function "l2"
     clf = RidgeClassifier()
     print "starts fitting"

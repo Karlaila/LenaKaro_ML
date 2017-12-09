@@ -27,7 +27,7 @@ plt.show()"""""
 
 
 """classification"""
-Y_pred = ut.do_rc_submit(test_features, features, labels)
+Y_pred = ut.do_rc(test_features, features, labels)
 ut.output_labels(Y_pred, filename='labels_rc')
 #ut.do_rc(X_test, Y_test, X_train, Y_train)
 #print ut.check(Y_test, Y_pred)
