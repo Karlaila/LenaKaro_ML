@@ -10,8 +10,10 @@ from sklearn.gaussian_process.kernels import RBF
 from sklearn.naive_bayes import GaussianNB
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neural_network import MLPClassifier
+from sklearn import neighbors
 
 
+""" parsing """
 def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_limit = -1):
     X = []
     with open(path_feature, 'r') as csvfile:
@@ -66,7 +68,11 @@ def even_classes(X, Y, number = -1):
         if sums_train[int(Y[i]-1)] < number:
             X_new.append(X[i])
             Y_new.append(Y[i])
-    return X_new, Y_new    
+    return X_new, Y_new
+#TODO continue
+
+
+"""checking"""
 
 def check (Y_test, Y_pred):
     ok = 0
@@ -91,6 +97,33 @@ def output_labels(Y, filename='labels'):
 
 
 # for followitg features the best score
+
+
+"""accuracy"""
+
+# linear model - Ridge Classifier - 62 ;o | with balanced class 54 | NOT LOGLOSS
+def do_rc(X_test, Y_test, X_train, Y_train):
+    # creating a classifier of loss function "hinge" and penalty function "l2"
+    clf = RidgeClassifier()
+    print "starts fitting"
+    print clf.fit(X_train, Y_train)
+    print "finished fitting, starts predictions"
+    Y_pred = clf.predict(X_test)
+    print "finished predictions"
+    return Y_pred
+
+# linear model - Ridge Classifier with Cross Valifation - 62 ;o | with balanced class 51
+def do_rcv(X_test, X_train, Y_train):
+    # creating a classifier of loss function "hinge" and penalty function "l2"
+    clf = RidgeClassifierCV()
+    print "starts fitting"
+    print clf.fit(X_train, Y_train)
+    print "finished fitting, starts predictions"
+    Y_pred = clf.predict(X_test)
+    print "finished predictions"
+    return Y_pred
+
+# for followitg features the best score | NOT LOGLOSS
 def do_svc(X_test, Y_test, X_train, Y_train):
     clf = svm.SVC(decision_function_shape='ovo', class_weight='balanced', kernel = "poly")
     print "starts fitting"
@@ -102,17 +135,39 @@ def do_svc(X_test, Y_test, X_train, Y_train):
     return Y_pred
 
 
-# very random, no matter of loss and penalty functions, between 35-56 percent
-def do_sgd(X_test, Y_test, X_train, Y_train):
-    # creating a classifier of loss function "hinge" and penalty function "l2"
-    clf = SGDClassifier(loss="hinge", penalty="l2")
+
+"""logloss"""
+
+# multi-layer perceptron (MLP) algorithm that trains using Backpropagation. | LOGLOSS
+def do_mlp(X_test, Y_test, X_train, Y_train):
+    clf = MLPClassifier(solver='adam', hidden_layer_sizes=(100,))
+    clf.out_activation_ = "Softmax"
+    clf.n_outputs_ = 10
     print "starts fitting"
     print clf.fit(X_train, Y_train)
+    print clf.classes_
+    print clf.out_activation_
     print "finished fitting, starts predictions"
     Y_pred = clf.predict(X_test)
     print "finished predictions"
     return Y_pred
 
+
+# for followitg features the best score | LOGLOSS
+def do_nn(X_test, Y_test, X_train, Y_train):
+    n_neighbors = 31
+    clf = neighbors.KNeighborsClassifier(n_neighbors)
+    print "starts fitting"
+    print clf.fit(X_train, Y_train)
+    print "finished fitting"
+    Y_pred = []
+    for i in range(0, len(Y_test)):
+        Y_pred.append(clf.predict([X_test[i]]))
+    return Y_pred
+
+
+
+""" SLOW, LOW, not working """
 
 # very low score (around 30)
 def do_dec_tree(X_test, Y_test, X_train, Y_train):
@@ -124,7 +179,6 @@ def do_dec_tree(X_test, Y_test, X_train, Y_train):
     Y_pred = clf.predict(X_test)
     print "finished predictions"
     return Y_pred
-
 
 
 # Gaussian process classification - very slow
@@ -159,46 +213,10 @@ def do_mnb(X_test, Y_test, X_train, Y_train):
     print "finished predictions"
     return Y_pred
 
-# multi-layer perceptron (MLP) algorithm that trains using Backpropagation.
-def do_mlp(X_test, Y_test, X_train, Y_train):
-    clf = MLPClassifier(solver='adam', hidden_layer_sizes=(100,))
-    clf.out_activation_ = "Softmax"
-    clf.n_outputs_ = 10
-    print "starts fitting"
-    print clf.fit(X_train, Y_train)
-    print clf.classes_
-    print clf.out_activation_
-    print "finished fitting, starts predictions"
-    Y_pred = clf.predict(X_test)
-    print "finished predictions"
-    return Y_pred
-
-
-# linear model - Ridge Classifier - 62 ;o | with balanced class 54
-def do_rc_test(X_test, Y_test, X_train, Y_train):
+# very random, no matter of loss and penalty functions, between 35-56 percent
+def do_sgd(X_test, Y_test, X_train, Y_train):
     # creating a classifier of loss function "hinge" and penalty function "l2"
-    clf = RidgeClassifier()
-    print "starts fitting"
-    print clf.fit(X_train, Y_train)
-    print "finished fitting, starts predictions"
-    Y_pred = clf.predict(X_test)
-    print "finished predictions"
-    return Y_pred
-
-def do_rc_submit(X_test, X_train, Y_train):
-    # creating a classifier of loss function "hinge" and penalty function "l2"
-    clf = RidgeClassifier()
-    print "starts fitting"
-    print clf.fit(X_train, Y_train)
-    print "finished fitting, starts predictions"
-    Y_pred = clf.predict(X_test)
-    print "finished predictions"
-    return Y_pred
-
-# linear model - Ridge Classifier with Cross Valifation - 62 ;o | with balanced class 51
-def do_rcv(X_test, Y_test, X_train, Y_train):
-    # creating a classifier of loss function "hinge" and penalty function "l2"
-    clf = RidgeClassifierCV()
+    clf = SGDClassifier(loss="hinge", penalty="l2")
     print "starts fitting"
     print clf.fit(X_train, Y_train)
     print "finished fitting, starts predictions"
