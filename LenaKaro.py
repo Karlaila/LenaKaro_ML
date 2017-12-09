@@ -25,6 +25,6 @@ plt.show()"""""
 
 
 """classification"""
-Y_pred = ut.do_mlp(X_test, Y_test, X_train, Y_train)
+Y_pred = ut.do_nn(X_test, Y_test, X_train, Y_train)
 print ut.check(Y_test, Y_pred)
 dv.confusionMatrix(Y_test, Y_pred)
