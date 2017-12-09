@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ffd049c-9b96-4d90-b6d4-06614c413182" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/labels_rc.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LenaKaro.py" afterPath="$PROJECT_DIR$/LenaKaro.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utilities.py" afterPath="$PROJECT_DIR$/utilities.py" />
     </list>
@@ -40,8 +38,8 @@
       <file leaf-file-name="LenaKaro.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LenaKaro.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="6" lean-forward="true" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+            <state relative-caret-position="150">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -52,15 +50,21 @@
       <file leaf-file-name="utilities.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1005">
-              <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+            <state relative-caret-position="386">
+              <caret line="97" column="0" lean-forward="true" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
                 <element signature="e#638#1264#0" expanded="false" />
                 <element signature="e#1294#1342#0" expanded="false" />
                 <element signature="e#1396#1778#0" expanded="false" />
                 <element signature="e#1821#2238#0" expanded="false" />
-                <element signature="e#2300#2646#0" expanded="false" />
+                <element signature="e#2701#3003#0" expanded="false" />
+                <marker date="1512830404709" expanded="false" signature="3040:3502" ph="..." />
+                <marker date="1512830404709" expanded="false" signature="3534:3773" ph="..." />
+                <marker date="1512830404709" expanded="false" signature="3910:4213" ph="..." />
+                <marker date="1512830404709" expanded="false" signature="4341:4646" ph="..." />
+                <marker date="1512830404709" expanded="false" signature="4739:4973" ph="..." />
+                <marker date="1512830404709" expanded="false" signature="5115:5497" ph="..." />
               </folding>
             </state>
           </provider>
@@ -107,8 +111,8 @@
       <list>
         <option value="$PROJECT_DIR$/tensorFlowCheck.py" />
         <option value="$PROJECT_DIR$/parser.ipynb" />
-        <option value="$PROJECT_DIR$/utilities.py" />
         <option value="$PROJECT_DIR$/LenaKaro.py" />
+        <option value="$PROJECT_DIR$/utilities.py" />
       </list>
     </option>
   </component>
@@ -233,7 +237,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -285,7 +289,13 @@
             <element signature="e#1294#1342#0" expanded="false" />
             <element signature="e#1396#1778#0" expanded="false" />
             <element signature="e#1821#2238#0" expanded="false" />
-            <element signature="e#2300#2646#0" expanded="false" />
+            <element signature="e#2701#3003#0" expanded="false" />
+            <marker date="1512830404709" expanded="false" signature="3040:3502" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="3534:3773" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="3910:4213" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="4341:4646" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="4739:4973" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="5115:5497" ph="..." />
           </folding>
         </state>
       </provider>
@@ -337,7 +347,13 @@
             <element signature="e#1294#1342#0" expanded="false" />
             <element signature="e#1396#1778#0" expanded="false" />
             <element signature="e#1821#2238#0" expanded="false" />
-            <element signature="e#2300#2646#0" expanded="false" />
+            <element signature="e#2701#3003#0" expanded="false" />
+            <marker date="1512830404709" expanded="false" signature="3040:3502" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="3534:3773" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="3910:4213" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="4341:4646" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="4739:4973" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="5115:5497" ph="..." />
           </folding>
         </state>
       </provider>
@@ -411,16 +427,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nearestNeighbor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dummy_solution_logloss.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -439,10 +445,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/nearestNeighbor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/LenaKaro.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="6" lean-forward="true" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        <state relative-caret-position="150">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -451,15 +467,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
-          <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+        <state relative-caret-position="386">
+          <caret line="97" column="0" lean-forward="true" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
             <element signature="e#638#1264#0" expanded="false" />
             <element signature="e#1294#1342#0" expanded="false" />
             <element signature="e#1396#1778#0" expanded="false" />
             <element signature="e#1821#2238#0" expanded="false" />
-            <element signature="e#2300#2646#0" expanded="false" />
+            <element signature="e#2701#3003#0" expanded="false" />
+            <marker date="1512830404709" expanded="false" signature="3040:3502" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="3534:3773" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="3910:4213" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="4341:4646" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="4739:4973" ph="..." />
+            <marker date="1512830404709" expanded="false" signature="5115:5497" ph="..." />
           </folding>
         </state>
       </provider>

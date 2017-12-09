@@ -7,9 +7,9 @@ import utilities as ut
 
 features, labels = ut.parse(data_limit=-1)
 test_features = ut.parse(path_feature='test_data.csv', path_labels='', data_limit = -1)
-print 'featur number ' +str(len(test_features))
+#print 'featur number ' +str(len(test_features))
 
-#X_test, Y_test, X_train, Y_train = ut.divide_set(features, labels)
+X_test, Y_test, X_train, Y_train = ut.divide_set(features, labels)
 #print len(X_test), len(Y_test), len(Y_train)
 
 #print "features \n", features[1:10]
@@ -34,7 +34,7 @@ plt.show()"""""
 
 """logloss classification"""
 
-Y_predLL = ut.do_mlp(X_test, Y_test, X_train, Y_train)
+Y_predLL = ut.do_nn(X_test, X_train, Y_train)
 print "Alg res: ", ut.checkLogLoss(Y_test, Y_predLL)
 print "Dummy res: ", ut.ckeckLogLossDummy(Y_test)
 

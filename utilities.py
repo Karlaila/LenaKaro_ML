@@ -107,22 +107,20 @@ def check (Y_test, Y_pred):
             #    print result, Y_test[i]
     return "ok: ", ok, "; not ok:", notok, "; percentage: ", (ok * 100) / (notok + ok)
 
-def output_labels(Y, filename='labels'):
-    print 'output file with labels'
-    with open(filename+'.csv', 'w') as csvfile:
-        fieldnames = ['Sample_id', 'Sample_label']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        for i in xrange(1,len(Y)+1):
-            writer.writerow({'Sample_id': str(int(i)), 'Sample_label': str(int(Y[i-1]))})
-
 def checkLogLoss(Y_test, Y_predLL):
     N = len(Y_test)
     res = 0
     for i in range(N):
+
+        # normalize
+        sumn = sum(Y_predLL[i])
+        Y_predLL[i] = [Y_predLL[i][j]/sumn for j in range(10)]
+
         for cl in range(1,11):
             # sum only the prob of the right class
             if Y_test[i] == cl:
+                if Y_predLL[i][cl-1] == 0:
+                    Y_predLL[i][cl - 1] = 0.0000000001
                 res += np.log(Y_predLL[i][cl-1])
     res /= N
     return -res
@@ -134,7 +132,7 @@ def ckeckLogLossDummy(Y_test):
         for cl in range(1, 11):
             # sum only the prob of the right class
             if Y_test[i] == 1:
-                res += np.log(1)
+                res += np.log(0.999999)
 
     res /= N
     return -res
@@ -166,14 +164,12 @@ def do_rcv(X_test, X_train, Y_train):
     return Y_pred
 
 # for followitg features the best score | NOT LOGLOSS
-def do_svc(X_test, Y_test, X_train, Y_train):
+def do_svc(X_test, X_train, Y_train):
     clf = svm.SVC(decision_function_shape='ovo', class_weight='balanced', kernel = "poly")
     print "starts fitting"
     print clf.fit(X_train, Y_train)
     print "finished fitting"
-    Y_pred = []
-    for i in range(0, len(Y_test)):
-        Y_pred.append(clf.predict([X_test[i]]))
+    Y_pred = clf.predict(X_test)
     return Y_pred
 
 
@@ -181,8 +177,8 @@ def do_svc(X_test, Y_test, X_train, Y_train):
 """logloss"""
 
 # multi-layer perceptron (MLP) algorithm that trains using Backpropagation. | LOGLOSS
-def do_mlp(X_test, Y_test, X_train, Y_train):
-    clf = MLPClassifier(solver='adam', hidden_layer_sizes=(100,))
+def do_mlp(X_test, X_train, Y_train):
+    clf = MLPClassifier(solver='adam', hidden_layer_sizes=(100,4))
     clf.out_activation_ = "Softmax"
     clf.n_outputs_ = 10
     print "starts fitting"
@@ -196,17 +192,14 @@ def do_mlp(X_test, Y_test, X_train, Y_train):
 
 
 # for followitg features the best score | LOGLOSS
-def do_nn(X_test, Y_test, X_train, Y_train):
+def do_nn(X_test, X_train, Y_train):
     n_neighbors = 31
     clf = neighbors.KNeighborsClassifier(n_neighbors)
     print "starts fitting"
     print clf.fit(X_train, Y_train)
     print "finished fitting"
-    Y_pred = []
-    for i in range(0, len(Y_test)):
-        Y_pred.append(clf.predict_proba([X_test[i]]))
+    Y_pred = clf.predict_proba(X_test)
     return Y_pred
-
 
 
 """ SLOW, LOW, not working """
