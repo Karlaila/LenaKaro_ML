@@ -22,17 +22,22 @@ def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_li
                 X.append([float(i) for i in row])
             counter+=1
 
-    counter = 0
-    Y = []
-    with open(path_labels, 'r') as csvfile:
-        reader = csv.reader(csvfile)
-        for row in reader:
-            if counter > data_limit or data_limit == -1:
-                Y.append(float(row[0]))
-            counter+=1
+    counter = 0   
+    if path_labels != '':
+        Y = []
+        with open(path_labels, 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                if counter > data_limit or data_limit == -1:
+                    Y.append(float(row[0]))
+                counter+=1
+        return X, Y
+    return X
 
-    return X, Y
-
+def get2ClassLabels(Y):
+    for y in Y:
+        if y != 1:
+            y = 0
 
 def divide_set(features, labels, fraction = 4):
     X_test, Y_test, X_train, Y_train = [], [], [], []
@@ -74,6 +79,16 @@ def check (Y_test, Y_pred):
             # if i < 900:
             #    print result, Y_test[i]
     return "ok: ", ok, "; not ok:", notok, "; percentage: ", (ok * 100) / (notok + ok)
+
+def output_labels(Y, filename='labels'):
+    print 'output file with labels'
+    with open(filename+'.csv', 'w') as csvfile:
+        fieldnames = ['Sample_id', 'Sample_label']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for i in xrange(1,len(Y)):
+            writer.writerow({'Sample_id': str(int(i)), 'Sample_label': str(int(Y[i]))})
+
 
 # for followitg features the best score
 def do_svc(X_test, Y_test, X_train, Y_train):
@@ -160,7 +175,17 @@ def do_mlp(X_test, Y_test, X_train, Y_train):
 
 
 # linear model - Ridge Classifier - 62 ;o | with balanced class 54
-def do_rc(X_test, Y_test, X_train, Y_train):
+def do_rc_test(X_test, Y_test, X_train, Y_train):
+    # creating a classifier of loss function "hinge" and penalty function "l2"
+    clf = RidgeClassifier()
+    print "starts fitting"
+    print clf.fit(X_train, Y_train)
+    print "finished fitting, starts predictions"
+    Y_pred = clf.predict(X_test)
+    print "finished predictions"
+    return Y_pred
+
+def do_rc_submit(X_test, X_train, Y_train):
     # creating a classifier of loss function "hinge" and penalty function "l2"
     clf = RidgeClassifier()
     print "starts fitting"
