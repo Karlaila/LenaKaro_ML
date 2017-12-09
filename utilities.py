@@ -70,7 +70,6 @@ def even_classes(X, Y, number = -1):
             X_new.append(X[i])
             Y_new.append(Y[i])
     return X_new, Y_new
-#TODO continue
 
 def output_labels(Y, filename='labels'):
     print 'output file with labels'
@@ -81,6 +80,18 @@ def output_labels(Y, filename='labels'):
         for i in xrange(1,len(Y)+1):
             writer.writerow({'Sample_id': str(int(i)), 'Sample_label': str(int(Y[i-1]))})
 
+def output_proba(probas, filename='probabilities'):
+    print 'output file with probabilities'
+    with open(filename+'.csv', 'w') as csvfile:
+        fieldnames = ['Sample_id']
+        for x in xrange(1,11):
+            fieldnames.append('Class_'+str(x))
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for i in xrange(0,len(probas)):
+            writer.writerow({'Sample_id': str(int(i+1)), 'Class_1': str(probas[i][0]), 'Class_2': str(probas[i][1]), 
+                'Class_3': str(probas[i][2]),'Class_4': str(probas[i][3]),'Class_5': str(probas[i][4]),'Class_6': str(probas[i][5]),
+                'Class_7': str(probas[i][6]),'Class_8': str(probas[i][7]), 'Class_9': str(probas[i][8]),'Class_10': str(probas[i][9])})
 
 """checking"""
 
@@ -167,7 +178,7 @@ def do_svc(X_test, X_train, Y_train):
 
 # multi-layer perceptron (MLP) algorithm that trains using Backpropagation. | LOGLOSS
 def do_mlp(X_test, X_train, Y_train):
-    clf = MLPClassifier(solver='adam', hidden_layer_sizes=(100,4))
+    clf = MLPClassifier(solver='adam', hidden_layer_sizes=(100,))
     clf.out_activation_ = "Softmax"
     clf.n_outputs_ = 10
     print "starts fitting"
@@ -175,9 +186,10 @@ def do_mlp(X_test, X_train, Y_train):
     print clf.classes_
     print clf.out_activation_
     print "finished fitting, starts predictions"
-    Y_pred = clf.predict_proba(X_test)
+    Y_proba = clf.predict_proba(X_test)
+    Y_pred = clf.predict(X_test)
     print "finished predictions"
-    return Y_pred
+    return Y_pred, Y_proba
 
 
 # for followitg features the best score | LOGLOSS
@@ -187,8 +199,9 @@ def do_nn(X_test, X_train, Y_train):
     print "starts fitting"
     print clf.fit(X_train, Y_train)
     print "finished fitting"
-    Y_pred = clf.predict_proba(X_test)
-    return Y_pred
+    Y_proba = clf.predict_proba(X_test)
+    Y_pred = clf.predict(X_test)
+    return Y_pred, Y_proba
 
 
 """ SLOW, LOW, not working """
