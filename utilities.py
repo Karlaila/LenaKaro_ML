@@ -1,12 +1,15 @@
 import csv
 from sklearn import svm
 from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import RidgeClassifierCV
 from sklearn import tree
 import collections
 from sklearn.gaussian_process import GaussianProcessClassifier
 from sklearn.gaussian_process.kernels import RBF
 from sklearn.naive_bayes import GaussianNB
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.neural_network import MLPClassifier
 
 
 def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_limit = -1):
@@ -96,7 +99,6 @@ def do_sgd(X_test, Y_test, X_train, Y_train):
     return Y_pred
 
 
-
 # very low score (around 30)
 def do_dec_tree(X_test, Y_test, X_train, Y_train):
     # creating a classifier of loss function "hinge" and penalty function "l2"
@@ -110,7 +112,7 @@ def do_dec_tree(X_test, Y_test, X_train, Y_train):
 
 
 
-# Gaussian process classification - very long
+# Gaussian process classification - very slow
 def do_gpc(X_test, Y_test, X_train, Y_train):
     # creating a classifier of loss function "hinge" and penalty function "l2"
     clf = GaussianProcessClassifier(kernel=1.0 * RBF(length_scale=1.0))
@@ -122,7 +124,7 @@ def do_gpc(X_test, Y_test, X_train, Y_train):
     return Y_pred
 
 
-# Gaussian Naive Bayes
+# Gaussian Naive Bayes - fast;
 def do_gnb(X_test, Y_test, X_train, Y_train):
     clf = GaussianNB()
     print "starts fitting"
@@ -132,9 +134,46 @@ def do_gnb(X_test, Y_test, X_train, Y_train):
     print "finished predictions"
     return Y_pred
 
-# Multinomial Naive Bayes
+# Multinomial Naive Bayes - cannot use this, as we have negative features
 def do_mnb(X_test, Y_test, X_train, Y_train):
     clf = MultinomialNB()
+    print "starts fitting"
+    print clf.fit(X_train, Y_train)
+    print "finished fitting, starts predictions"
+    Y_pred = clf.predict(X_test)
+    print "finished predictions"
+    return Y_pred
+
+# multi-layer perceptron (MLP) algorithm that trains using Backpropagation.
+def do_mlp(X_test, Y_test, X_train, Y_train):
+    clf = MLPClassifier(solver='adam', hidden_layer_sizes=(100,))
+    clf.out_activation_ = "Softmax"
+    clf.n_outputs_ = 10
+    print "starts fitting"
+    print clf.fit(X_train, Y_train)
+    print clf.classes_
+    print clf.out_activation_
+    print "finished fitting, starts predictions"
+    Y_pred = clf.predict(X_test)
+    print "finished predictions"
+    return Y_pred
+
+
+# linear model - Ridge Classifier - 62 ;o | with balanced class 54
+def do_rc(X_test, Y_test, X_train, Y_train):
+    # creating a classifier of loss function "hinge" and penalty function "l2"
+    clf = RidgeClassifier()
+    print "starts fitting"
+    print clf.fit(X_train, Y_train)
+    print "finished fitting, starts predictions"
+    Y_pred = clf.predict(X_test)
+    print "finished predictions"
+    return Y_pred
+
+# linear model - Ridge Classifier with Cross Valifation - 62 ;o | with balanced class 51
+def do_rcv(X_test, Y_test, X_train, Y_train):
+    # creating a classifier of loss function "hinge" and penalty function "l2"
+    clf = RidgeClassifierCV()
     print "starts fitting"
     print clf.fit(X_train, Y_train)
     print "finished fitting, starts predictions"
