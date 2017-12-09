@@ -25,6 +25,12 @@ plt.show()"""""
 
 
 """classification"""
-Y_pred = ut.do_nn(X_test, Y_test, X_train, Y_train)
-print ut.check(Y_test, Y_pred)
-dv.confusionMatrix(Y_test, Y_pred)
+#Y_pred = ut.do_nn(X_test, Y_test, X_train, Y_train)
+#print ut.check(Y_test, Y_pred)
+#dv.confusionMatrix(Y_test, Y_pred)
+
+"""logloss classification"""
+
+Y_predLL = ut.do_mlp(X_test, Y_test, X_train, Y_train)
+print "Alg res: ", ut.checkLogLoss(Y_test, Y_predLL)
+print "Dummy res: ", ut.ckeckLogLossDummy(Y_test)
