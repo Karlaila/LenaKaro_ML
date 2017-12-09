@@ -178,7 +178,7 @@ def do_svc(X_test, X_train, Y_train):
 
 # multi-layer perceptron (MLP) algorithm that trains using Backpropagation. | LOGLOSS
 def do_mlp(X_test, X_train, Y_train):
-    clf = MLPClassifier(solver='adam', hidden_layer_sizes=(100,4))
+    clf = MLPClassifier(solver='adam', hidden_layer_sizes=(100,))
     clf.out_activation_ = "Softmax"
     clf.n_outputs_ = 10
     print "starts fitting"
