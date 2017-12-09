@@ -31,12 +31,12 @@ def parse(path_feature='train_data.csv', path_labels='train_labels.csv', data_li
     return X, Y
 
 
-def divide_set(features, labels):
+def divide_set(features, labels, fraction = 4):
     X_test, Y_test, X_train, Y_train = [], [], [], []
 
     # dividing into test and train data
     for i in range(0, len(labels)):
-        if i % 4 == 0:
+        if i % fraction == 0:
             X_test.append(features[i][1:265])
             Y_test.append(labels[i])
         else:
@@ -44,12 +44,22 @@ def divide_set(features, labels):
             Y_train.append(labels[i])
     return X_test, Y_test, X_train, Y_train
 
-def even_classes(X, Y):
+def even_classes(X, Y, number = -1):
     counter=collections.Counter(Y)
     distribution = counter.values()
-    print(distribution)
-    least_common = counter.least_common(1)
-    print least_common
+    print distribution
+    if number == -1:
+        number = counter.least_common(1)
+    sums_train = [0,0,0,0,0,0,0,0,0,0]
+    X_new = [] 
+    Y_new = []
+    for i in range(len(Y)):
+        sums_train[int(Y[i]-1)] += 1
+        if sums_train[int(Y[i]-1)] < number:
+            X_new.append(X[i])
+            Y_new.append(Y[i])
+    return X_new, Y_new
+#TODO continue
     
 
 def check (Y_test, Y_pred):

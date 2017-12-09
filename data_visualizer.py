@@ -12,8 +12,9 @@ from sklearn.metrics import confusion_matrix
 
 names = ['Pop_Rock', 'Electronic', 'Rap', 'Jazz', 'Latin', 'RnB', 'International', 'Country', 'Reggae', 'Blues']
 
-def visualizeLabels():
-	features, labels = parser.parse()
+def visualizeLabels(labels = -1):
+	if labels == -1:
+		features, labels = parser.parse()
 
 	counter=collections.Counter(labels)
 	print(counter.values())
