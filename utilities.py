@@ -77,7 +77,7 @@ def output_labels(Y, filename='labels'):
         fieldnames = ['Sample_id', 'Sample_label']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-        for i in xrange(1,len(Y)):
+        for i in xrange(1,len(Y)+1):
             writer.writerow({'Sample_id': str(int(i)), 'Sample_label': str(int(Y[i-1]))})
 
 def output_proba(probas, filename='probabilities'):
