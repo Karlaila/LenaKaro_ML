@@ -1,1 +1,6 @@
 # LenaKaro_ML
+
+This project tackles the problem of using machine learning to classifying songs into ten genres. 
+Genre classification can, for instance, be applied in music streaming services to automatically create playlists or make suggestions. The data used in this project describes songs with 264 features describing timbre, pitch and rhythm. The classes are imbalanced, especially the genre pop-rock occurs almost as often as all other genres combined. For classification, we use the multi-layer perceptron classifier, nearest neighbor classifier and ridge classifier of the python scikit library to solve the classification problem. We compare the accuracy of all three ondifferent test sets and the logarithmic loss of the multi-layer perceptron classifier and nearest neighbor classifier. We found that the ridge classifier achieves the best result with an accuracy of 0.63539 on the provided test set. The logarithmic loss for the nearest neighbor classifier (0.38046) is better than the logarithmic loss of the multi-layer perceptron classifier (0.75319).
+
+More details about it can be found in the report: https://drive.google.com/file/d/156NRTZ2S2TfTFE9eOtobx4ZgwmSCda0G/view?usp=sharing.
